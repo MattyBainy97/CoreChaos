@@ -1,0 +1,12 @@
+name: CoreChaos
+main: com.corechaos.CoreChaos
+author: Matty
+version: 1.0
+description: >
+             CoreChaos Plugin
+             
+commands:
+  list:
+    description: shows the player list to a player
+  start:
+    description: starts the game
