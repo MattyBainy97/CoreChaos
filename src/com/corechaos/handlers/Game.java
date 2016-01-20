@@ -7,6 +7,7 @@ import com.corechaos.threads.ReloadTimer;
 import com.corechaos.utils.ChatUtilities;
 import com.corechaos.utils.LocationUtilities;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
@@ -27,6 +28,9 @@ public class Game {
 
                 for (Player p : Bukkit.getOnlinePlayers()) {
 
+                    Database.openConnection();
+                    Database.updateCcTable(p, "games", Database.getCc(p, "games") + 1);
+                    
                     p.setHealth(20.0);
                     p.setFoodLevel(40);
                     p.setLevel(0);
@@ -51,7 +55,39 @@ public class Game {
 
     public static void stop() {
 
-        ChatUtilities.broadcast("GG");
+            FireworkHandler.newFirework(LocationUtilities.lobby);
+            FireworkHandler.newFirework(LocationUtilities.redRespawn);
+            FireworkHandler.newFirework(LocationUtilities.purpleRespawn);
+            FireworkHandler.newFirework(LocationUtilities.greenRespawn);
+            FireworkHandler.newFirework(LocationUtilities.yellowRespawn);
+            
+            CoreChaos.plugin.getServer().getScheduler().scheduleSyncDelayedTask(CoreChaos.plugin, new Runnable() {
+                @Override
+                public void run() {
+
+                    FireworkHandler.newFirework(LocationUtilities.lobby);
+                    FireworkHandler.newFirework(LocationUtilities.redRespawn);
+                    FireworkHandler.newFirework(LocationUtilities.purpleRespawn);
+                    FireworkHandler.newFirework(LocationUtilities.greenRespawn);
+                    FireworkHandler.newFirework(LocationUtilities.yellowRespawn);
+
+                }
+            }, 20L);
+            
+            CoreChaos.plugin.getServer().getScheduler().scheduleSyncDelayedTask(CoreChaos.plugin, new Runnable() {
+                @Override
+                public void run() {
+
+                    FireworkHandler.newFirework(LocationUtilities.lobby);
+                    FireworkHandler.newFirework(LocationUtilities.redRespawn);
+                    FireworkHandler.newFirework(LocationUtilities.purpleRespawn);
+                    FireworkHandler.newFirework(LocationUtilities.greenRespawn);
+                    FireworkHandler.newFirework(LocationUtilities.yellowRespawn);
+
+                }
+            }, 40L);
+
+        ChatUtilities.broadcastNoStarter(ChatColor.DARK_RED + "GAME OVER");
         GameState.setState(GameState.POST_GAME);
         new Thread(new ReloadTimer()).start();
         canStart = false;

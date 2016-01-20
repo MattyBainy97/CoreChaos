@@ -4,6 +4,7 @@ import com.corechaos.CoreChaos;
 import com.corechaos.GameState;
 import com.corechaos.handlers.CCItem;
 import com.corechaos.handlers.CoreSB;
+import com.corechaos.handlers.Database;
 import com.corechaos.handlers.Game;
 import com.corechaos.handlers.PlayerHandler;
 import com.corechaos.handlers.Tasks;
@@ -36,6 +37,36 @@ public class PlayerJoin extends CCListener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoinEvent(PlayerJoinEvent e) {
+        
+        Database.openConnection();
+
+        try {
+
+            if (Database.playerTableContainsPlayer(e.getPlayer())) {
+
+                Database.updateLastLogin(e.getPlayer());
+
+            } else {
+
+                Database.addPlayerToPlayerTable(e.getPlayer());
+
+            }
+
+            if (!Database.ccTableContainsPlayer(e.getPlayer())) {
+
+                Database.addPlayerToCcTable(e.getPlayer());
+
+            }
+
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+
+        } finally {
+
+            Database.closeConnection();
+
+        }
 
         e.setJoinMessage("");
         final Player p = e.getPlayer();

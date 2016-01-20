@@ -6,7 +6,29 @@ description: >
              CoreChaos Plugin
              
 commands:
-  list:
-    description: shows the player list to a player
   start:
-    description: starts the game
+    description: Starts the game
+    permission: corechaos.pass
+    permission-message: Permission Denied!
+  pass:
+    description: Gives the chosen player a pass
+    permission: corechaos.pass
+    permission-message: Permission Denied!
+  passes:
+    description: Shows how many passes the user has
+  extend:
+    description: Extends the start timer by 60s
+  list:
+    description: Shows the online players
+  records:
+    description: Shows the player their records
+  msg:
+    description: Sends a message to the player
+    
+permissions:
+  corechaos.start:
+    description: Allows use of start
+    default: op
+  corechaos.pass:
+    description: Allows use of pass
+    default: op

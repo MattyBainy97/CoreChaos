@@ -7,6 +7,7 @@ import com.corechaos.handlers.CCItem;
 import com.corechaos.handlers.CoreHandler;
 import com.corechaos.handlers.CoreType;
 import com.corechaos.handlers.CoreSB;
+import com.corechaos.handlers.Database;
 import com.corechaos.handlers.PlayerHandler;
 import com.corechaos.handlers.Tasks;
 import com.corechaos.listeners.CCListener;
@@ -134,6 +135,12 @@ public class BlockBreak extends CCListener {
                             ChatUtilities.broadcast(ChatColor.RED + "Red Core" + ChatColor.GOLD + " has been destroyed");
                             CoreHandler.destroyCore(CoreType.RED);
                             Bukkit.getServer().getWorld("4Corners").playSound(b.getBlock().getLocation(), Sound.EXPLODE, 5, 1);
+                            
+                            Database.openConnection();
+                            Database.updateCcTable(b.getPlayer(), "points", Database.getCc(b.getPlayer(), "points") + 20);
+                            Database.updateCcTable(b.getPlayer(), "destroyed", Database.getCc(b.getPlayer(), "destroyed") + 1);
+                            ChatUtilities.onePlayer("You gained " + ChatColor.GREEN + "20" + ChatColor.GOLD + " points", b.getPlayer());
+                            Database.closeConnection();
 
                         }
 
@@ -189,6 +196,12 @@ public class BlockBreak extends CCListener {
                             CoreHandler.destroyCore(CoreType.PURPLE);
                             Bukkit.getServer().getWorld("4Corners").playSound(b.getBlock().getLocation(), Sound.EXPLODE, 5, 1);
 
+                            Database.openConnection();
+                            Database.updateCcTable(b.getPlayer(), "points", Database.getCc(b.getPlayer(), "points") + 20);
+                            Database.updateCcTable(b.getPlayer(), "destroyed", Database.getCc(b.getPlayer(), "destroyed") + 1);
+                            ChatUtilities.onePlayer("You gained " + ChatColor.GREEN + "20" + ChatColor.GOLD + " points", b.getPlayer());
+                            Database.closeConnection();
+                            
                         }
 
                     }
@@ -243,6 +256,12 @@ public class BlockBreak extends CCListener {
                             CoreHandler.destroyCore(CoreType.GREEN);
                             Bukkit.getServer().getWorld("4Corners").playSound(b.getBlock().getLocation(), Sound.EXPLODE, 5, 1);
 
+                            Database.openConnection();
+                            Database.updateCcTable(b.getPlayer(), "points", Database.getCc(b.getPlayer(), "points") + 20);
+                            Database.updateCcTable(b.getPlayer(), "destroyed", Database.getCc(b.getPlayer(), "destroyed") + 1);
+                            ChatUtilities.onePlayer("You gained " + ChatColor.GREEN + "20" + ChatColor.GOLD + " points", b.getPlayer());
+                            Database.closeConnection();
+                            
                         }
 
                     }
@@ -296,6 +315,12 @@ public class BlockBreak extends CCListener {
                             ChatUtilities.broadcast(ChatColor.YELLOW + "Yellow Core" + ChatColor.GOLD + " has been destroyed");
                             CoreHandler.destroyCore(CoreType.YELLOW);
                             Bukkit.getServer().getWorld("4Corners").playSound(b.getBlock().getLocation(), Sound.EXPLODE, 5, 1);
+                            
+                            Database.openConnection();
+                            Database.updateCcTable(b.getPlayer(), "points", Database.getCc(b.getPlayer(), "points") + 20);
+                            Database.updateCcTable(b.getPlayer(), "destroyed", Database.getCc(b.getPlayer(), "destroyed") + 1);
+                            ChatUtilities.onePlayer("You gained " + ChatColor.GREEN + "20" + ChatColor.GOLD + " points", b.getPlayer());
+                            Database.closeConnection();
 
                         }
 

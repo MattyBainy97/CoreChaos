@@ -1,6 +1,7 @@
 package com.corechaos.utils;
 
 import com.corechaos.GameState;
+import com.corechaos.handlers.Database;
 import com.corechaos.handlers.PlayerHandler;
 import com.corechaos.handlers.Tasks;
 import java.lang.reflect.Field;
@@ -244,7 +245,33 @@ public class ChatUtilities {
 
     }
 
-    public static void records(Player player) {
+    public static void records(Player player, Player send) {
+        
+        Database.openConnection();
+
+        try {
+
+            send.sendMessage(GRAY + "[" + AQUA + "CoreChaos" + RED + " Records" + GRAY + "]");
+            send.sendMessage(GOLD + "User: " + YELLOW + player.getName());
+            send.sendMessage(GOLD + "Points: " + YELLOW + Database.getCc(player, "points"));
+            send.sendMessage(GOLD + "Games: " + YELLOW + Database.getCc(player, "games"));
+            send.sendMessage(GOLD + "Wins: " + YELLOW + Database.getCc(player, "wins"));
+            send.sendMessage(GOLD + "Kills: " + YELLOW + Database.getCc(player, "kills"));
+            send.sendMessage(GOLD + "Deaths: " + YELLOW + Database.getCc(player, "deaths"));
+            send.sendMessage(GOLD + "Cores Destroyed: " + YELLOW + Database.getCc(player, "destroyed"));
+            send.sendMessage(GRAY + "[" + AQUA + "CoreChaos" + RED + " Records" + GRAY + "]");
+
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+
+        } finally {
+
+            Database.closeConnection();
+
+        }
+
+        
     }
 
     private static String redStarter() {

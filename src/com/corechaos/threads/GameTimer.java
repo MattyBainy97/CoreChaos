@@ -1,11 +1,16 @@
 package com.corechaos.threads;
 
 import com.corechaos.GameState;
+import com.corechaos.handlers.Database;
 import com.corechaos.handlers.Game;
 import com.corechaos.handlers.PlayerHandler;
+import com.corechaos.handlers.Tasks;
 import com.corechaos.utils.ChatUtilities;
 import com.corechaos.utils.LocationUtilities;
+import java.util.UUID;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
 public class GameTimer implements Runnable {
 
@@ -29,31 +34,91 @@ public class GameTimer implements Runnable {
                     
                     if(PlayerHandler.players.size() <= 2){
                         
+                        Database.openConnection();
+                        
                         if(PlayerHandler.purple.isEmpty() && PlayerHandler.green.isEmpty() && PlayerHandler.yellow.isEmpty()){
                             
                             ChatUtilities.broadcast(ChatColor.RED + "Red Team" + ChatColor.GOLD + " win the game");
+                            
+                            for(UUID uuid : PlayerHandler.red){
+                                
+                                if(!Tasks.isDisconnected(uuid)){
+                                    
+                                    Player p = Bukkit.getPlayer(uuid);
+                                    Database.updateCcTable(p, "points", Database.getCc(p, "points") + 20);
+                                    ChatUtilities.onePlayer("You gained " + ChatColor.GREEN + "20" + ChatColor.GOLD + " points for winning", p);
+                                    Database.updateCcTable(p, "wins", Database.getCc(p, "wins") + 1);
+                                    
+                                }
+                                
+                            }
+                            
                             Game.stop();
                             break;
                             
                         }else if(PlayerHandler.red.isEmpty() && PlayerHandler.green.isEmpty() && PlayerHandler.yellow.isEmpty()){
                             
                             ChatUtilities.broadcast(ChatColor.DARK_PURPLE + "Purple Team" + ChatColor.GOLD + " win the game");
+                            
+                            for(UUID uuid : PlayerHandler.purple){
+                                
+                                if(!Tasks.isDisconnected(uuid)){
+                                    
+                                    Player p = Bukkit.getPlayer(uuid);
+                                    Database.updateCcTable(p, "points", Database.getCc(p, "points") + 20);
+                                    ChatUtilities.onePlayer("You gained " + ChatColor.GREEN + "20" + ChatColor.GOLD + " points for winning", p);
+                                    Database.updateCcTable(p, "wins", Database.getCc(p, "wins") + 1);
+                                    
+                                }
+                                
+                            }
+                            
                             Game.stop();
                             break;
                             
                         }else if(PlayerHandler.purple.isEmpty() && PlayerHandler.red.isEmpty() && PlayerHandler.yellow.isEmpty()){
                             
                             ChatUtilities.broadcast(ChatColor.DARK_GREEN + "Green Team" + ChatColor.GOLD + " win the game");
+                            
+                            for(UUID uuid : PlayerHandler.green){
+                                
+                                if(!Tasks.isDisconnected(uuid)){
+                                    
+                                    Player p = Bukkit.getPlayer(uuid);
+                                    Database.updateCcTable(p, "points", Database.getCc(p, "points") + 20);
+                                    ChatUtilities.onePlayer("You gained " + ChatColor.GREEN + "20" + ChatColor.GOLD + " points for winning", p);
+                                    Database.updateCcTable(p, "wins", Database.getCc(p, "wins") + 1);
+                                    
+                                }
+                                
+                            }
+                            
                             Game.stop();
                             break;
                             
                         }else if(PlayerHandler.purple.isEmpty() && PlayerHandler.green.isEmpty() && PlayerHandler.red.isEmpty()){
                             
                             ChatUtilities.broadcast(ChatColor.YELLOW + "Yellow Team" + ChatColor.GOLD + " win the game");
+                            
+                            for(UUID uuid : PlayerHandler.yellow){
+                                
+                                if(!Tasks.isDisconnected(uuid)){
+                                    
+                                    Player p = Bukkit.getPlayer(uuid);
+                                    Database.updateCcTable(p, "points", Database.getCc(p, "points") + 20);
+                                    ChatUtilities.onePlayer("You gained " + ChatColor.GREEN + "20" + ChatColor.GOLD + " points for winning", p);
+                                    Database.updateCcTable(p, "wins", Database.getCc(p, "wins") + 1);
+                                    
+                                }
+                                
+                            }
+                            
                             Game.stop();
                             break;
                             
                         }
+                        
+                        Database.closeConnection();
                         
                     }
 

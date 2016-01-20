@@ -3,6 +3,7 @@ package com.corechaos.listeners.player;
 import com.corechaos.CoreChaos;
 import com.corechaos.handlers.CoreHandler;
 import com.corechaos.handlers.CoreType;
+import com.corechaos.handlers.Database;
 import com.corechaos.handlers.PlayerHandler;
 import com.corechaos.listeners.CCListener;
 import com.corechaos.utils.ChatUtilities;
@@ -35,8 +36,7 @@ public class PlayerDeath extends CCListener {
         boolean isPurple = PlayerHandler.purple.contains(killed.getUniqueId());
         boolean isGreen = PlayerHandler.green.contains(killed.getUniqueId());
         boolean isYellow = PlayerHandler.yellow.contains(killed.getUniqueId());
-
-
+        
         if (isRed && !CoreHandler.isCoreAlive(CoreType.RED)) {
 
             PlayerHandler.addSpec(killed);
@@ -84,6 +84,13 @@ public class PlayerDeath extends CCListener {
             ChatUtilities.onePlayer("You killed " + cc + killed.getName(), killer);
 
         }
+        
+        Database.openConnection();
+        Database.updateCcTable(killer, "kills", Database.getCc(killer, "kills") + 1);
+        Database.updateCcTable(killer, "points", Database.getCc(killer, "points") + 5);
+        ChatUtilities.onePlayer("You gained " + ChatColor.GREEN + "5" + ChatColor.GOLD + " points", killer);
+        Database.updateCcTable(killed, "deaths", Database.getCc(killed, "deaths") + 1);
+        Database.closeConnection();
 
         CoreChaos.plugin.getServer().getScheduler().scheduleSyncDelayedTask(CoreChaos.plugin, new Runnable() {
             @Override

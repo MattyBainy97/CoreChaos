@@ -7,6 +7,7 @@ package com.corechaos;
 
 import com.corechaos.handlers.CCItem;
 import com.corechaos.handlers.CoreSB;
+import com.corechaos.handlers.Database;
 import com.corechaos.handlers.PlayerHandler;
 import com.corechaos.listeners.inventory.ClickSlot;
 import com.corechaos.listeners.player.AsyncPlayerPreLogin;
@@ -28,7 +29,9 @@ import com.corechaos.listeners.world.ListPing;
 import com.corechaos.threads.StartCountdown;
 import com.corechaos.utils.ChatUtilities;
 import com.corechaos.utils.LocationUtilities;
+import java.util.HashMap;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -47,19 +50,19 @@ public class CoreChaos extends JavaPlugin {
     public void onEnable() {
 
         plugin = this;
-        
+
         new Thread(new StartCountdown()).start();
-        
+
         for (Player p : Bukkit.getOnlinePlayers()) {
 
             p.kickPlayer("Rejoin.");
 
         }
-        
+
         LocationUtilities.clearArea();
-        
+
         GameState.setState(GameState.IN_LOBBY);
-        
+
         registerListeners();
         CCItem.setMetas();
 
@@ -74,7 +77,7 @@ public class CoreChaos extends JavaPlugin {
             e.remove();
 
         }
-        
+
         CoreSB.initializeScoreboard();
 
     }
@@ -83,31 +86,134 @@ public class CoreChaos extends JavaPlugin {
     public void onDisable() {
 
         plugin = null;
-        
+
         CoreSB.unregisterTeams();
         PlayerHandler.clearAll();
 
     }
-    
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-        
-        if(commandLabel.equalsIgnoreCase("list")){
-            
+
+        if (commandLabel.equalsIgnoreCase("list")) {
+
             ChatUtilities.showList((Player) sender);
-            
+
         }
-        
-        if(commandLabel.equalsIgnoreCase("start")){
-            
+
+        if (commandLabel.equalsIgnoreCase("start")) {
+
             StartCountdown.forceStart = true;
-            
+
         }
-        
+
+        if (commandLabel.equalsIgnoreCase("records")) {
+
+            Player p = (Player) sender;
+
+            if (args.length == 0) {
+
+                ChatUtilities.records(p, p);
+
+            } else if (args.length == 1) {
+
+                try {
+
+                    Player targetPlayer = (Player) p.getServer().getOfflinePlayer(args[0]);
+                    ChatUtilities.records(targetPlayer, p);
+
+                } catch (Exception e) {
+                    
+                    ChatUtilities.onePlayer("Wrong use of this command!", p);
+                    
+                } 
+
+            } else {
+
+                ChatUtilities.onePlayer("Wrong use of this command!", p);
+
+            }
+
+        }
+
+        if (commandLabel.equalsIgnoreCase("passes")) {
+
+            Player p = (Player) sender;
+            if (args.length == 0) {
+
+                Database.openConnection();
+                ChatUtilities.onePlayer(ChatColor.GOLD + "You have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + " passes remaining!", p);
+                Database.closeConnection();
+
+            } else {
+
+                ChatUtilities.onePlayer("Wrong use of this command!", p);
+
+            }
+
+        }
+
+        if (commandLabel.equalsIgnoreCase("pass")) {
+            Player p = (Player) sender;
+            Database.openConnection();
+            if (p.isOp() == true) {
+                if (args.length == 0) {
+                    ChatUtilities.onePlayer("Wrong use of this command!", p);
+                } else if (args.length == 1) {
+                    ChatUtilities.onePlayer("Wrong use of this command!", p);
+                } else if (args.length == 2) {
+                    try {
+                        Player targetPlayer = p.getServer().getPlayer(args[0]);
+                        try {
+                            int i = Integer.parseInt(args[1]);
+                            if (i >= 0 && i <= 100) {
+                                ChatUtilities.onePlayer(ChatColor.GOLD + "You have recieved " + ChatColor.GREEN + i + ChatColor.GOLD + " passes!", targetPlayer);
+                                if (targetPlayer != p) {
+                                    ChatUtilities.onePlayer(ChatColor.GOLD + "You have sent " + ChatColor.GREEN + i + ChatColor.GOLD + " passes to " + ChatColor.DARK_AQUA + targetPlayer.getName() + ChatColor.GOLD + "!", p);
+                                }
+                                Database.updatePasses(targetPlayer, Database.getPasses(targetPlayer) + i);
+                            } else {
+                                ChatUtilities.onePlayer(ChatColor.GOLD + "Enter a serious number... " + ChatColor.RED + i + ChatColor.GOLD + " is just too many...", p);
+                            }
+                        } catch (Exception e) {
+                            ChatUtilities.onePlayer("Wrong use of this command!", p);
+                        }
+
+                    } catch (Exception e) {
+                        ChatUtilities.onePlayer("Player is not online!", p);
+                    }
+                }
+            }
+            Database.closeConnection();
+        }
+
+        if (commandLabel.equalsIgnoreCase("msg") || commandLabel.equalsIgnoreCase("tell")) {
+            Player player = (Player) sender;
+            final HashMap<String, String> hashmap = new HashMap<String, String>();
+            if (args.length < 2) {
+                ChatUtilities.onePlayer(ChatColor.RED + "Too few arguments", (Player) sender);
+                ChatUtilities.onePlayer(ChatColor.RED + "/msg <player> <message>", (Player) sender);
+                return true;
+            }
+            if (Bukkit.getPlayer(args[0]) == null) {
+                ChatUtilities.onePlayer(ChatColor.RED + "That player is not online", (Player) sender);
+                return true;
+            }
+            String msg = "";
+            for (String s : args) {
+                msg = msg + " " + s;
+            }
+            Bukkit.getPlayer(args[0]).sendMessage(ChatColor.DARK_AQUA + player.getName() + ChatColor.GRAY + " »» " + ChatColor.DARK_AQUA + args[0] + ChatColor.GRAY + " »" + ChatColor.WHITE + msg.replaceFirst(" " + args[0], ""));
+            player.sendMessage(ChatColor.DARK_AQUA + player.getName() + ChatColor.GRAY + " »» " + ChatColor.DARK_AQUA + args[0] + ChatColor.GRAY + " »" + ChatColor.WHITE + msg.replaceFirst(" " + args[0], ""));
+            hashmap.put(player.getName(), args[0]);
+            hashmap.put(args[0], player.getName());
+            return true;
+        }
+
         return false;
-        
+
     }
-    
+
     public void registerListeners() {
 
         PluginManager pm = getServer().getPluginManager();
