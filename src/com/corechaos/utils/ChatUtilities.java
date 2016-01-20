@@ -235,13 +235,63 @@ public class ChatUtilities {
                 }
             }
         } else {
-            broadcastNoStarter(chatStarter(player) + DARK_AQUA + player.getName() + ChatColor.GRAY + " » " + WHITE + msg);
+            Database.openConnection();
+            Bukkit.broadcastMessage(GRAY + "(" + YELLOW + Database.getCc(player, "points") + GRAY + ") " + chatStarter(player) + DARK_AQUA + player.getName() + ChatColor.GRAY + " » " + WHITE + msg);
+            Database.closeConnection();
         }
 
     }
 
     public static String chatStarter(Player p) {
 
+        Database.openConnection();
+
+        int points = Database.getCc(p, "points");
+        int highestPoints = Database.getHighestPoints();
+
+        Database.closeConnection();
+
+        if (points == highestPoints) {
+
+            return RED + "§lC" + GOLD + "§lo" + YELLOW + "§lr" + GREEN + "§le " + BLUE + "§lC" + DARK_PURPLE + "§lr" + LIGHT_PURPLE + "§lu" + RED + "§ls" + GOLD + "§lh" + YELLOW + "§le" + GREEN + "§lr " + BLUE + "§l|";
+
+        } else {
+
+            if (points >= 0 && points <= 49) {
+
+                return GOLD + "Apprentice | ";
+
+            } else if (points >= 50 && points <= 249) {
+
+                return LIGHT_PURPLE + "Hitter | ";
+
+            } else if (points >= 250 && points <= 999) {
+
+                return BLUE + "Breaker | ";
+
+            } else if (points >= 1000 && points <= 2499) {
+
+                return YELLOW + "Smasher | ";
+
+            } else if (points >= 2500 && points <= 4999) {
+
+                return GREEN + "Destroyer | ";
+
+            } else if (points >= 5000 && points <= 9999) {
+
+                return RED + "Destructive | ";
+
+            } else if (points >= 10000 && points <= 49999) {
+
+                return AQUA + "Explosive | ";
+
+            } else if (points >= 50000) {
+
+                return DARK_GREEN + "Demolitionist | ";
+
+            }
+        }
+        
         return "";
 
     }
