@@ -33,6 +33,7 @@ import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -118,15 +119,33 @@ public class CoreChaos extends JavaPlugin {
             } else if (args.length == 1) {
 
                 try {
+                    
+                    Database.openConnection();
 
-                    Player targetPlayer = (Player) p.getServer().getOfflinePlayer(args[0]);
-                    ChatUtilities.records(targetPlayer, p);
+                    OfflinePlayer targetPlayer = p.getServer().getOfflinePlayer(args[0]);
+                    if(Database.ccTableContainsOfflinePlayer(targetPlayer)){
+                        
+                        ChatUtilities.records(targetPlayer, p);
+                        
+                    } else if(Database.playerTableContainsOfflinePlayer(targetPlayer)) {
+                        
+                        p.sendMessage(ChatColor.GRAY + "[" + ChatColor.RED + "Red" + ChatColor.GREEN + "Apple" + ChatColor.RED + "Core" + ChatColor.GRAY + "] " + ChatColor.GOLD + "This player has never played " + ChatColor.AQUA + "CoreChaos");
+                        
+                    } else {
+                        
+                        p.sendMessage(ChatColor.GRAY + "[" + ChatColor.RED + "Red" + ChatColor.GREEN + "Apple" + ChatColor.RED + "Core" + ChatColor.GRAY + "] " + ChatColor.GOLD + "This player has never been on " + ChatColor.RED + "Red" + ChatColor.GREEN + "Apple" + ChatColor.RED + "Core");
+                        
+                    }
 
                 } catch (Exception e) {
                     
                     ChatUtilities.onePlayer("Wrong use of this command!", p);
                     
-                } 
+                } finally {
+                    
+                    Database.closeConnection();
+                    
+                }
 
             } else {
 

@@ -34,8 +34,6 @@ public class GameTimer implements Runnable {
                     
                     if(PlayerHandler.players.size() <= 2){
                         
-                        Database.openConnection();
-                        
                         if(PlayerHandler.purple.isEmpty() && PlayerHandler.green.isEmpty() && PlayerHandler.yellow.isEmpty()){
                             
                             ChatUtilities.broadcast(ChatColor.RED + "Red Team" + ChatColor.GOLD + " win the game");
@@ -44,10 +42,12 @@ public class GameTimer implements Runnable {
                                 
                                 if(!Tasks.isDisconnected(uuid)){
                                     
+                                    Database.openConnection();
                                     Player p = Bukkit.getPlayer(uuid);
                                     Database.updateCcTable(p, "points", Database.getCc(p, "points") + 20);
                                     ChatUtilities.onePlayer("You gained " + ChatColor.GREEN + "20" + ChatColor.GOLD + " points for winning", p);
                                     Database.updateCcTable(p, "wins", Database.getCc(p, "wins") + 1);
+                                    Database.closeConnection();
                                     
                                 }
                                 
@@ -64,10 +64,12 @@ public class GameTimer implements Runnable {
                                 
                                 if(!Tasks.isDisconnected(uuid)){
                                     
+                                    Database.openConnection();
                                     Player p = Bukkit.getPlayer(uuid);
                                     Database.updateCcTable(p, "points", Database.getCc(p, "points") + 20);
                                     ChatUtilities.onePlayer("You gained " + ChatColor.GREEN + "20" + ChatColor.GOLD + " points for winning", p);
                                     Database.updateCcTable(p, "wins", Database.getCc(p, "wins") + 1);
+                                    Database.closeConnection();
                                     
                                 }
                                 
@@ -84,10 +86,12 @@ public class GameTimer implements Runnable {
                                 
                                 if(!Tasks.isDisconnected(uuid)){
                                     
+                                    Database.openConnection();
                                     Player p = Bukkit.getPlayer(uuid);
                                     Database.updateCcTable(p, "points", Database.getCc(p, "points") + 20);
                                     ChatUtilities.onePlayer("You gained " + ChatColor.GREEN + "20" + ChatColor.GOLD + " points for winning", p);
                                     Database.updateCcTable(p, "wins", Database.getCc(p, "wins") + 1);
+                                    Database.closeConnection();
                                     
                                 }
                                 
@@ -104,10 +108,12 @@ public class GameTimer implements Runnable {
                                 
                                 if(!Tasks.isDisconnected(uuid)){
                                     
+                                    Database.openConnection();
                                     Player p = Bukkit.getPlayer(uuid);
                                     Database.updateCcTable(p, "points", Database.getCc(p, "points") + 20);
                                     ChatUtilities.onePlayer("You gained " + ChatColor.GREEN + "20" + ChatColor.GOLD + " points for winning", p);
                                     Database.updateCcTable(p, "wins", Database.getCc(p, "wins") + 1);
+                                    Database.closeConnection();
                                     
                                 }
                                 
@@ -117,8 +123,6 @@ public class GameTimer implements Runnable {
                             break;
                             
                         }
-                        
-                        Database.closeConnection();
                         
                     }
 

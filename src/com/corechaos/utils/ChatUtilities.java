@@ -12,6 +12,7 @@ import net.minecraft.server.v1_8_R3.PlayerConnection;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import static org.bukkit.ChatColor.*;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
@@ -245,20 +246,20 @@ public class ChatUtilities {
 
     }
 
-    public static void records(Player player, Player send) {
+    public static void records(OfflinePlayer player, Player send) {
         
         Database.openConnection();
 
         try {
-
+            
             send.sendMessage(GRAY + "[" + AQUA + "CoreChaos" + RED + " Records" + GRAY + "]");
             send.sendMessage(GOLD + "User: " + YELLOW + player.getName());
-            send.sendMessage(GOLD + "Points: " + YELLOW + Database.getCc(player, "points"));
-            send.sendMessage(GOLD + "Games: " + YELLOW + Database.getCc(player, "games"));
-            send.sendMessage(GOLD + "Wins: " + YELLOW + Database.getCc(player, "wins"));
-            send.sendMessage(GOLD + "Kills: " + YELLOW + Database.getCc(player, "kills"));
-            send.sendMessage(GOLD + "Deaths: " + YELLOW + Database.getCc(player, "deaths"));
-            send.sendMessage(GOLD + "Cores Destroyed: " + YELLOW + Database.getCc(player, "destroyed"));
+            send.sendMessage(GOLD + "Points: " + YELLOW + Database.getOfflineCc(player, "points"));
+            send.sendMessage(GOLD + "Games: " + YELLOW + Database.getOfflineCc(player, "games"));
+            send.sendMessage(GOLD + "Wins: " + YELLOW + Database.getOfflineCc(player, "wins"));
+            send.sendMessage(GOLD + "Kills: " + YELLOW + Database.getOfflineCc(player, "kills"));
+            send.sendMessage(GOLD + "Deaths: " + YELLOW + Database.getOfflineCc(player, "deaths"));
+            send.sendMessage(GOLD + "Cores Destroyed: " + YELLOW + Database.getOfflineCc(player, "destroyed"));
             send.sendMessage(GRAY + "[" + AQUA + "CoreChaos" + RED + " Records" + GRAY + "]");
 
         } catch (Exception ex) {

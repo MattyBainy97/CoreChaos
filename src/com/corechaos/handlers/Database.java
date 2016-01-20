@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 public class Database {
@@ -71,7 +72,53 @@ public class Database {
         
     }
     
+    public synchronized static boolean playerTableContainsOfflinePlayer(OfflinePlayer player){
+        
+        try{
+            
+            PreparedStatement sql = connection.prepareStatement("SELECT * FROM players WHERE uuid = ?;");
+            sql.setString(1, player.getUniqueId().toString());
+            ResultSet resultSet = sql.executeQuery();
+            boolean containsPlayer = resultSet.next();
+            
+            sql.close();
+            resultSet.close();
+            
+            return containsPlayer;
+            
+        }catch(Exception e){
+            
+            e.printStackTrace();
+            return false;
+            
+        }
+        
+    }
+    
     public synchronized static boolean ccTableContainsPlayer(Player player){
+        
+        try{
+            
+            PreparedStatement sql = connection.prepareStatement("SELECT * FROM corechaos WHERE uuid = ?;");
+            sql.setString(1, player.getUniqueId().toString());
+            ResultSet resultSet = sql.executeQuery();
+            boolean containsPlayer = resultSet.next();
+            
+            sql.close();
+            resultSet.close();
+            
+            return containsPlayer;
+            
+        }catch(Exception e){
+            
+            e.printStackTrace();
+            return false;
+            
+        }
+        
+    }
+    
+    public synchronized static boolean ccTableContainsOfflinePlayer(OfflinePlayer player){
         
         try{
             
@@ -223,6 +270,31 @@ public class Database {
     }
     
     public synchronized static int getCc(Player player, String column){
+        
+        try{
+            
+            PreparedStatement getScore = connection.prepareStatement("SELECT " + column + " FROM corechaos WHERE uuid = ?;");
+            getScore.setString(1, player.getUniqueId().toString());
+            ResultSet resultSet = getScore.executeQuery();
+            resultSet.next();
+           
+            int result = resultSet.getInt(column);
+            
+            getScore.close();
+            
+            return result;
+            
+        }catch(Exception e){
+        
+            e.printStackTrace();
+            
+            return 0;
+            
+        }
+        
+    }
+    
+    public synchronized static int getOfflineCc(OfflinePlayer player, String column){
         
         try{
             

@@ -45,7 +45,7 @@ public class StartCountdown implements Runnable {
                     if (timeUntilStart % 10 == 0) {
 
                         ChatUtilities.broadcast(ChatColor.YELLOW + "" + timeUntilStart + ChatColor.GOLD + " seconds until the game starts");
-                        ChatUtilities.broadcast(ChatColor.GOLD + "Current players online: " + ChatColor.YELLOW + Bukkit.getOnlinePlayers());
+                        ChatUtilities.broadcast(ChatColor.GOLD + "Current players online: " + ChatColor.YELLOW + Bukkit.getOnlinePlayers().size());
                         ChatUtilities.broadcast(ChatColor.GOLD + "Players required to start: " + ChatColor.YELLOW + 4);
 
                     }
