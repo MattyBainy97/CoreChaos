@@ -71,13 +71,19 @@ public class PlayerHandler {
 
                 Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.redBuild);
                 
+                for (int i = 1; i <= 32; i++) {
+                    
+                    Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.redBuildOne);
+                    
+                }
+                
             }
 
         } else {
             
             for (UUID uuid : red) {
                 
-                for (int i = 1; i <= 2; i++) {
+                for (int i = 1; i <= 3; i++) {
                     
                     Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.redBuild);
                     
@@ -93,13 +99,19 @@ public class PlayerHandler {
 
                 Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.purpleBuild);
                 
+                for (int i = 1; i <= 32; i++) {
+                    
+                    Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.purpleBuildOne);
+                    
+                }
+                
             }
 
         } else {
             
             for (UUID uuid : purple) {
                 
-                for (int i = 1; i <= 2; i++) {
+                for (int i = 1; i <= 3; i++) {
                     
                     Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.purpleBuild);
                     
@@ -115,13 +127,19 @@ public class PlayerHandler {
 
                 Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.greenBuild);
                 
+                for (int i = 1; i <= 32; i++) {
+                    
+                    Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.greenBuildOne);
+                    
+                }
+                
             }
 
         } else {
             
             for (UUID uuid : green) {
                 
-                for (int i = 1; i <= 2; i++) {
+                for (int i = 1; i <= 3; i++) {
                     
                     Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.greenBuild);
                     
@@ -137,13 +155,19 @@ public class PlayerHandler {
 
                 Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.yellowBuild);
                 
+                for (int i = 1; i <= 32; i++) {
+                    
+                    Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.yellowBuildOne);
+                    
+                }
+                
             }
 
         } else {
             
             for (UUID uuid : yellow) {
                 
-                for (int i = 1; i <= 2; i++) {
+                for (int i = 1; i <= 3; i++) {
                     
                     Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.yellowBuild);
                     
