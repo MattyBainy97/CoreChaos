@@ -70,27 +70,27 @@ public class PlayerHandler {
             for (UUID uuid : red) {
 
                 Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.redBuild);
-                
+
                 for (int i = 1; i <= 32; i++) {
-                    
+
                     Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.redBuildOne);
-                    
+
                 }
-                
+
             }
 
         } else {
-            
+
             for (UUID uuid : red) {
-                
+
                 for (int i = 1; i <= 3; i++) {
-                    
+
                     Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.redBuild);
-                    
+
                 }
-                
+
             }
-            
+
         }
 
         if (purple.size() == 2) {
@@ -98,81 +98,81 @@ public class PlayerHandler {
             for (UUID uuid : purple) {
 
                 Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.purpleBuild);
-                
+
                 for (int i = 1; i <= 32; i++) {
-                    
+
                     Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.purpleBuildOne);
-                    
+
                 }
-                
+
             }
 
         } else {
-            
+
             for (UUID uuid : purple) {
-                
+
                 for (int i = 1; i <= 3; i++) {
-                    
+
                     Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.purpleBuild);
-                    
+
                 }
-                
+
             }
 
         }
-        
+
         if (green.size() == 2) {
 
             for (UUID uuid : green) {
 
                 Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.greenBuild);
-                
+
                 for (int i = 1; i <= 32; i++) {
-                    
+
                     Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.greenBuildOne);
-                    
+
                 }
-                
+
             }
 
         } else {
-            
+
             for (UUID uuid : green) {
-                
+
                 for (int i = 1; i <= 3; i++) {
-                    
+
                     Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.greenBuild);
-                    
+
                 }
-                
+
             }
 
         }
-        
+
         if (yellow.size() == 2) {
 
             for (UUID uuid : yellow) {
 
                 Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.yellowBuild);
-                
+
                 for (int i = 1; i <= 32; i++) {
-                    
+
                     Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.yellowBuildOne);
-                    
+
                 }
-                
+
             }
 
         } else {
-            
+
             for (UUID uuid : yellow) {
-                
+
                 for (int i = 1; i <= 3; i++) {
-                    
+
                     Bukkit.getPlayer(uuid).getInventory().addItem(CCItem.yellowBuild);
-                    
+
                 }
-                
+
             }
 
         }
@@ -183,56 +183,53 @@ public class PlayerHandler {
 
         Collections.shuffle(players);
 
-        loopPlayers : for (UUID uuid : players) {
+        for (UUID uuid : players) {
 
-            if (red.contains(uuid)){
-                
-                CoreSB.addRed(Bukkit.getPlayer(uuid));
-                break loopPlayers;
-                
-            } else if (purple.contains(uuid)){
-                
-                CoreSB.addPurple(Bukkit.getPlayer(uuid));
-                break loopPlayers;
-                
-            } else if (green.contains(uuid)){
-                
-                CoreSB.addGreen(Bukkit.getPlayer(uuid));
-                break loopPlayers;
-                
-            } else if (yellow.contains(uuid)){
-                
-                CoreSB.addYellow(Bukkit.getPlayer(uuid));
-                break loopPlayers;
-                
-            }
-            
-            int[] currentTeamSizes = {red.size(), purple.size(), green.size(), yellow.size()};
+            if (red.contains(uuid)) {
 
-            int smallestTeamSize = getSmallestTeam(currentTeamSizes);
-
-            if (red.size() == smallestTeamSize) {
-
-                red.add(uuid);
                 CoreSB.addRed(Bukkit.getPlayer(uuid));
 
-            } else if (purple.size() == smallestTeamSize) {
+            } else if (purple.contains(uuid)) {
 
-                purple.add(uuid);
                 CoreSB.addPurple(Bukkit.getPlayer(uuid));
 
-            } else if (green.size() == smallestTeamSize) {
+            } else if (green.contains(uuid)) {
 
-                green.add(uuid);
                 CoreSB.addGreen(Bukkit.getPlayer(uuid));
 
-            } else if (yellow.size() == smallestTeamSize) {
+            } else if (yellow.contains(uuid)) {
 
-                yellow.add(uuid);
                 CoreSB.addYellow(Bukkit.getPlayer(uuid));
 
-            }
+            } else {
 
+                int[] currentTeamSizes = {red.size(), purple.size(), green.size(), yellow.size()};
+
+                int smallestTeamSize = getSmallestTeam(currentTeamSizes);
+
+                if (red.size() == smallestTeamSize) {
+
+                    red.add(uuid);
+                    CoreSB.addRed(Bukkit.getPlayer(uuid));
+
+                } else if (purple.size() == smallestTeamSize) {
+
+                    purple.add(uuid);
+                    CoreSB.addPurple(Bukkit.getPlayer(uuid));
+
+                } else if (green.size() == smallestTeamSize) {
+
+                    green.add(uuid);
+                    CoreSB.addGreen(Bukkit.getPlayer(uuid));
+
+                } else if (yellow.size() == smallestTeamSize) {
+
+                    yellow.add(uuid);
+                    CoreSB.addYellow(Bukkit.getPlayer(uuid));
+
+                }
+
+            }
         }
 
     }
