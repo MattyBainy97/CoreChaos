@@ -154,11 +154,13 @@ public class ChatUtilities {
 
             for (UUID uuid : PlayerHandler.spec) {
 
-                Player c = Bukkit.getPlayer(uuid);
-                if (uuid == PlayerHandler.spec.get(PlayerHandler.spec.size() - 1)) {
-                    specs = specs + c.getName();
-                } else {
-                    specs = specs + c.getName() + ", ";
+                if (!Tasks.isDisconnected(uuid)) {
+                    Player c = Bukkit.getPlayer(uuid);
+                    if (uuid == PlayerHandler.spec.get(PlayerHandler.spec.size() - 1)) {
+                        specs = specs + c.getName();
+                    } else {
+                        specs = specs + c.getName() + ", ";
+                    }
                 }
 
             }
@@ -253,7 +255,7 @@ public class ChatUtilities {
 
         if (points == highestPoints) {
 
-            return RED + "§lC" + GOLD + "§lo" + YELLOW + "§lr" + GREEN + "§le " + BLUE + "§lC" + DARK_PURPLE + "§lr" + LIGHT_PURPLE + "§lu" + RED + "§ls" + GOLD + "§lh" + YELLOW + "§le" + GREEN + "§lr " + BLUE + "§l|";
+            return RED + "§lC" + GOLD + "§lo" + YELLOW + "§lr" + GREEN + "§le " + BLUE + "§lC" + DARK_PURPLE + "§lr" + LIGHT_PURPLE + "§lu" + RED + "§ls" + GOLD + "§lh" + YELLOW + "§le" + GREEN + "§lr " + BLUE + "§l| ";
 
         } else {
 
@@ -291,17 +293,17 @@ public class ChatUtilities {
 
             }
         }
-        
+
         return "";
 
     }
 
     public static void records(OfflinePlayer player, Player send) {
-        
+
         Database.openConnection();
 
         try {
-            
+
             send.sendMessage(GRAY + "[" + AQUA + "CoreChaos" + RED + " Records" + GRAY + "]");
             send.sendMessage(GOLD + "User: " + YELLOW + player.getName());
             send.sendMessage(GOLD + "Points: " + YELLOW + Database.getOfflineCc(player, "points"));
@@ -322,7 +324,7 @@ public class ChatUtilities {
 
         }
 
-        
+
     }
 
     private static String redStarter() {
