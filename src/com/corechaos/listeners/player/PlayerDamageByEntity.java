@@ -4,7 +4,6 @@ import com.corechaos.CoreChaos;
 import com.corechaos.GameState;
 import com.corechaos.handlers.PlayerHandler;
 import com.corechaos.listeners.CCListener;
-import com.corechaos.utils.ChatUtilities;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -55,15 +54,8 @@ public class PlayerDamageByEntity extends CCListener {
 
                         } else {
 
-                            double newHealth = hurt.getHealth() - 5;
-
-                            if (newHealth < 5) {
-                                hurt.setHealth(0);
-                            } else {
-                                hurt.setHealth(newHealth);
-                            }
-
-
+                            event.setDamage(5);
+                            
                         }
                     }
 

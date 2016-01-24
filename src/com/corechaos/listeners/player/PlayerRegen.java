@@ -18,7 +18,11 @@ public class PlayerRegen extends CCListener{
     @EventHandler
     public void onPlayerRegainHealthEvent(EntityRegainHealthEvent event) {
         
-        CoreSB.setHealth((Player) event.getEntity());
+        if (event.getRegainReason() == EntityRegainHealthEvent.RegainReason.SATIATED || event.getRegainReason() == EntityRegainHealthEvent.RegainReason.REGEN) {
+            
+            event.setCancelled(true);
+            
+        }
         
     }
 }
