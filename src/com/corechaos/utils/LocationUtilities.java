@@ -21,19 +21,19 @@ import org.bukkit.material.Wool;
 public class LocationUtilities {
 
     public static Location lobby = new Location(Bukkit.getWorld("4Corners"), 0.5, 34.0, 0.5);
-    private static Location redCore = new Location(Bukkit.getWorld("4Corners"), 12, 34, 12);
+    public static Location redCore = new Location(Bukkit.getWorld("4Corners"), 12, 34, 12);
     private static Location redPlayerOne = new Location(Bukkit.getWorld("4Corners"), 9.5, 34.0, 8.5, (float) -36.4, (float) 14.2);
     private static Location redPlayerTwo = new Location(Bukkit.getWorld("4Corners"), 8.5, 34.0, 9.5, (float) -54.4, (float) 14.2);
     public static Location redRespawn = new Location(Bukkit.getWorld("4Corners"), 5.5, 34.0, 5.5, (float) 135.0, (float) 0);
-    private static Location purpleCore = new Location(Bukkit.getWorld("4Corners"), 12, 34, -12);
+    public static Location purpleCore = new Location(Bukkit.getWorld("4Corners"), 12, 34, -12);
     private static Location purplePlayerOne = new Location(Bukkit.getWorld("4Corners"), 8.5, 34.0, -8.5, (float) -125.4, (float) 14.2);
     private static Location purplePlayerTwo = new Location(Bukkit.getWorld("4Corners"), 9.5, 34.0, -7.5, (float) -144.4, (float) 14.2);
     public static Location purpleRespawn = new Location(Bukkit.getWorld("4Corners"), 5.5, 34.0, -4.5, (float) 45.0, (float) 0);
-    private static Location greenCore = new Location(Bukkit.getWorld("4Corners"), -12, 34, 12);
+    public static Location greenCore = new Location(Bukkit.getWorld("4Corners"), -12, 34, 12);
     private static Location greenPlayerOne = new Location(Bukkit.getWorld("4Corners"), -7.5, 34.0, 9.5, (float) 54.4, (float) 14.2);
     private static Location greenPlayerTwo = new Location(Bukkit.getWorld("4Corners"), -8.5, 34.0, 8.5, (float) 35.4, (float) 14.2);
     public static Location greenRespawn = new Location(Bukkit.getWorld("4Corners"), -4.5, 34.0, 5.5, (float) -135.0, (float) 0);
-    private static Location yellowCore = new Location(Bukkit.getWorld("4Corners"), -12, 34, -12);
+    public static Location yellowCore = new Location(Bukkit.getWorld("4Corners"), -12, 34, -12);
     private static Location yellowPlayerOne = new Location(Bukkit.getWorld("4Corners"), -8.5, 34.0, -7.5, (float) 146.4, (float) 14.2);
     private static Location yellowPlayerTwo = new Location(Bukkit.getWorld("4Corners"), -7.5, 34.0, -8.5, (float) 126.4, (float) 14.2);
     public static Location yellowRespawn = new Location(Bukkit.getWorld("4Corners"), -4.5, 34.0, -4.5, (float) -45.0, (float) 0);
