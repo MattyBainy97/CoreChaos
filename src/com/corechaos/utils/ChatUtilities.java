@@ -5,6 +5,8 @@ import com.corechaos.handlers.Database;
 import com.corechaos.handlers.PlayerHandler;
 import com.corechaos.handlers.Tasks;
 import java.lang.reflect.Field;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.UUID;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
 import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
@@ -265,7 +267,7 @@ public class ChatUtilities {
 
             } else if (points >= 50 && points <= 249) {
 
-                return LIGHT_PURPLE + "Hitter | ";
+                return LIGHT_PURPLE + "Beater | ";
 
             } else if (points >= 250 && points <= 999) {
 
@@ -304,13 +306,16 @@ public class ChatUtilities {
 
         try {
 
+            double kd = Database.getOfflineCc(player, "kills") / Database.getOfflineCc(player, "deaths");
+            DecimalFormat df = new DecimalFormat("#.##");
+            df.setRoundingMode(RoundingMode.CEILING);
+            
             send.sendMessage(GRAY + "[" + AQUA + "CoreChaos" + RED + " Records" + GRAY + "]");
             send.sendMessage(GOLD + "User: " + YELLOW + player.getName());
             send.sendMessage(GOLD + "Points: " + YELLOW + Database.getOfflineCc(player, "points"));
             send.sendMessage(GOLD + "Games: " + YELLOW + Database.getOfflineCc(player, "games"));
             send.sendMessage(GOLD + "Wins: " + YELLOW + Database.getOfflineCc(player, "wins"));
-            send.sendMessage(GOLD + "Kills: " + YELLOW + Database.getOfflineCc(player, "kills"));
-            send.sendMessage(GOLD + "Deaths: " + YELLOW + Database.getOfflineCc(player, "deaths"));
+            send.sendMessage(GOLD + "K/D Ratio: " + YELLOW + df.format(kd));
             send.sendMessage(GOLD + "Cores Destroyed: " + YELLOW + Database.getOfflineCc(player, "destroyed"));
             send.sendMessage(GRAY + "[" + AQUA + "CoreChaos" + RED + " Records" + GRAY + "]");
 

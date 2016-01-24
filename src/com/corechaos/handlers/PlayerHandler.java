@@ -183,8 +183,30 @@ public class PlayerHandler {
 
         Collections.shuffle(players);
 
-        for (UUID uuid : players) {
+        loopPlayers : for (UUID uuid : players) {
 
+            if (red.contains(uuid)){
+                
+                CoreSB.addRed(Bukkit.getPlayer(uuid));
+                break loopPlayers;
+                
+            } else if (purple.contains(uuid)){
+                
+                CoreSB.addPurple(Bukkit.getPlayer(uuid));
+                break loopPlayers;
+                
+            } else if (green.contains(uuid)){
+                
+                CoreSB.addGreen(Bukkit.getPlayer(uuid));
+                break loopPlayers;
+                
+            } else if (yellow.contains(uuid)){
+                
+                CoreSB.addYellow(Bukkit.getPlayer(uuid));
+                break loopPlayers;
+                
+            }
+            
             int[] currentTeamSizes = {red.size(), purple.size(), green.size(), yellow.size()};
 
             int smallestTeamSize = getSmallestTeam(currentTeamSizes);

@@ -30,6 +30,7 @@ import com.corechaos.threads.StartCountdown;
 import com.corechaos.utils.ChatUtilities;
 import com.corechaos.utils.LocationUtilities;
 import java.util.HashMap;
+import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -104,7 +105,443 @@ public class CoreChaos extends JavaPlugin {
 
         if (commandLabel.equalsIgnoreCase("start")) {
 
-            StartCountdown.forceStart = true;
+            if (GameState.isState(GameState.IN_LOBBY)) {
+
+                StartCountdown.forceStart = true;
+
+            } else {
+
+                ChatUtilities.onePlayer("A game is already in progress", (Player) sender);
+
+            }
+
+        }
+
+        if (commandLabel.equalsIgnoreCase("red")) {
+
+            Player p = (Player) sender;
+            UUID uuid = p.getUniqueId();
+
+            Database.openConnection();
+            int passnum = Database.getPasses(p);
+
+            if (GameState.isState(GameState.IN_LOBBY)) {
+
+                if (passnum > 1) {
+
+                    if (PlayerHandler.red.contains(uuid)) {
+
+                        ChatUtilities.onePlayer("You are already on " + ChatColor.RED + "Red Team", p);
+
+                    } else {
+
+                        if (Bukkit.getOnlinePlayers().size() > 4) {
+
+                            if (PlayerHandler.red.size() < 2) {
+
+                                if (PlayerHandler.purple.contains(uuid)) {
+
+                                    PlayerHandler.purple.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.DARK_PURPLE + "Purple Team" + ChatColor.GOLD + " and joined " + ChatColor.RED + "Red Team", p);
+
+                                } else if (PlayerHandler.green.contains(uuid)) {
+
+                                    PlayerHandler.green.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.DARK_GREEN + "Green Team" + ChatColor.GOLD + " and joined " + ChatColor.RED + "Red Team", p);
+
+                                } else if (PlayerHandler.yellow.contains(uuid)) {
+
+                                    PlayerHandler.yellow.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.YELLOW + "Yellow Team" + ChatColor.GOLD + " and joined " + ChatColor.RED + "Red Team", p);
+
+                                } else {
+
+                                    ChatUtilities.onePlayer("You joined " + ChatColor.RED + "Red Team", p);
+
+                                }
+
+                                PlayerHandler.red.add(uuid);
+                                Database.updatePasses(p, Database.getPasses(p) - 1);
+                                ChatUtilities.onePlayer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
+
+                            } else {
+
+                                ChatUtilities.onePlayer(ChatColor.RED + "Red Team" + ChatColor.GOLD + " is full", p);
+
+                            }
+
+                        } else {
+
+                            if (PlayerHandler.red.size() < 1) {
+
+                                if (PlayerHandler.purple.contains(uuid)) {
+
+                                    PlayerHandler.purple.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.DARK_PURPLE + "Purple Team" + ChatColor.GOLD + " and joined " + ChatColor.RED + "Red Team", p);
+
+                                } else if (PlayerHandler.green.contains(uuid)) {
+
+                                    PlayerHandler.green.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.DARK_GREEN + "Green Team" + ChatColor.GOLD + " and joined " + ChatColor.RED + "Red Team", p);
+
+                                } else if (PlayerHandler.yellow.contains(uuid)) {
+
+                                    PlayerHandler.yellow.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.YELLOW + "Yellow Team" + ChatColor.GOLD + " and joined " + ChatColor.RED + "Red Team", p);
+
+                                } else {
+
+                                    ChatUtilities.onePlayer("You joined " + ChatColor.RED + "Red Team", p);
+
+                                }
+
+                                PlayerHandler.red.add(uuid);
+                                Database.updatePasses(p, Database.getPasses(p) - 1);
+                                ChatUtilities.onePlayer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
+
+                            } else {
+
+                                ChatUtilities.onePlayer(ChatColor.RED + "Red Team" + ChatColor.GOLD + " cannot be joined at this time", p);
+
+                            }
+
+                        }
+
+                    }
+                } else if (passnum > -1) {
+
+                    ChatUtilities.onePlayer(ChatColor.GOLD + "You don't have any passes!", p);
+
+                }
+
+            } else {
+
+                ChatUtilities.onePlayer("You cannot join a team while a game is in progress", p);
+
+            }
+
+            Database.closeConnection();
+
+        }
+
+        if (commandLabel.equalsIgnoreCase("purple")) {
+
+            Player p = (Player) sender;
+            UUID uuid = p.getUniqueId();
+
+            Database.openConnection();
+            int passnum = Database.getPasses(p);
+
+            if (GameState.isState(GameState.IN_LOBBY)) {
+
+                if (passnum > 1) {
+
+                    if (PlayerHandler.purple.contains(uuid)) {
+
+                        ChatUtilities.onePlayer("You are already on " + ChatColor.DARK_PURPLE + "Purple Team", p);
+
+                    } else {
+
+                        if (Bukkit.getOnlinePlayers().size() > 4) {
+
+                            if (PlayerHandler.purple.size() < 2) {
+
+                                if (PlayerHandler.red.contains(uuid)) {
+
+                                    PlayerHandler.red.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.RED + "Red Team" + ChatColor.GOLD + " and joined " + ChatColor.DARK_PURPLE + "Purple Team", p);
+
+                                } else if (PlayerHandler.green.contains(uuid)) {
+
+                                    PlayerHandler.green.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.DARK_GREEN + "Green Team" + ChatColor.GOLD + " and joined " + ChatColor.DARK_PURPLE + "Purple Team", p);
+
+                                } else if (PlayerHandler.yellow.contains(uuid)) {
+
+                                    PlayerHandler.yellow.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.YELLOW + "Yellow Team" + ChatColor.GOLD + " and joined " + ChatColor.DARK_PURPLE + "Purple Team", p);
+
+                                } else {
+
+                                    ChatUtilities.onePlayer("You joined " + ChatColor.DARK_PURPLE + "Purple Team", p);
+
+                                }
+
+                                PlayerHandler.purple.add(uuid);
+                                Database.updatePasses(p, Database.getPasses(p) - 1);
+                                ChatUtilities.onePlayer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
+
+                            } else {
+
+                                ChatUtilities.onePlayer(ChatColor.DARK_PURPLE + "Purple Team" + ChatColor.GOLD + " is full", p);
+
+                            }
+
+                        } else {
+
+                            if (PlayerHandler.purple.size() < 1) {
+
+                                if (PlayerHandler.red.contains(uuid)) {
+
+                                    PlayerHandler.red.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.RED + "Red Team" + ChatColor.GOLD + " and joined " + ChatColor.DARK_PURPLE + "Purple Team", p);
+
+                                } else if (PlayerHandler.green.contains(uuid)) {
+
+                                    PlayerHandler.green.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.DARK_GREEN + "Green Team" + ChatColor.GOLD + " and joined " + ChatColor.DARK_PURPLE + "Purple Team", p);
+
+                                } else if (PlayerHandler.yellow.contains(uuid)) {
+
+                                    PlayerHandler.yellow.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.YELLOW + "Yellow Team" + ChatColor.GOLD + " and joined " + ChatColor.DARK_PURPLE + "Purple Team", p);
+
+                                } else {
+
+                                    ChatUtilities.onePlayer("You joined " + ChatColor.DARK_PURPLE + "Purple Team", p);
+
+                                }
+
+                                PlayerHandler.purple.add(uuid);
+                                Database.updatePasses(p, Database.getPasses(p) - 1);
+                                ChatUtilities.onePlayer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
+
+                            } else {
+
+                                ChatUtilities.onePlayer(ChatColor.DARK_PURPLE + "Purple Team" + ChatColor.GOLD + " cannot be joined at this time", p);
+
+                            }
+
+                        }
+
+                    }
+                } else if (passnum > -1) {
+
+                    ChatUtilities.onePlayer(ChatColor.GOLD + "You don't have any passes!", p);
+
+                }
+
+            } else {
+
+                ChatUtilities.onePlayer("You cannot join a team while a game is in progress", p);
+
+            }
+
+            Database.closeConnection();
+
+        }
+        
+        if (commandLabel.equalsIgnoreCase("green")) {
+
+            Player p = (Player) sender;
+            UUID uuid = p.getUniqueId();
+
+            Database.openConnection();
+            int passnum = Database.getPasses(p);
+
+            if (GameState.isState(GameState.IN_LOBBY)) {
+
+                if (passnum > 1) {
+
+                    if (PlayerHandler.green.contains(uuid)) {
+
+                        ChatUtilities.onePlayer("You are already on " + ChatColor.DARK_GREEN + "Green Team", p);
+
+                    } else {
+
+                        if (Bukkit.getOnlinePlayers().size() > 4) {
+
+                            if (PlayerHandler.green.size() < 2) {
+
+                                if (PlayerHandler.red.contains(uuid)) {
+
+                                    PlayerHandler.red.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.RED + "Red Team" + ChatColor.GOLD + " and joined " + ChatColor.DARK_GREEN + "Green Team", p);
+
+                                } else if (PlayerHandler.purple.contains(uuid)) {
+
+                                    PlayerHandler.purple.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.DARK_PURPLE + "Purple Team" + ChatColor.GOLD + " and joined " + ChatColor.DARK_GREEN + "Green Team", p);
+
+                                } else if (PlayerHandler.yellow.contains(uuid)) {
+
+                                    PlayerHandler.yellow.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.YELLOW + "Yellow Team" + ChatColor.GOLD + " and joined " + ChatColor.DARK_GREEN + "Green Team", p);
+
+                                } else {
+
+                                    ChatUtilities.onePlayer("You joined " + ChatColor.DARK_GREEN + "Green Team", p);
+
+                                }
+
+                                PlayerHandler.green.add(uuid);
+                                Database.updatePasses(p, Database.getPasses(p) - 1);
+                                ChatUtilities.onePlayer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
+
+                            } else {
+
+                                ChatUtilities.onePlayer(ChatColor.DARK_GREEN + "Green Team" + ChatColor.GOLD + " is full", p);
+
+                            }
+
+                        } else {
+
+                            if (PlayerHandler.green.size() < 1) {
+
+                                if (PlayerHandler.red.contains(uuid)) {
+
+                                    PlayerHandler.red.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.RED + "Red Team" + ChatColor.GOLD + " and joined " + ChatColor.DARK_GREEN + "Green Team", p);
+
+                                } else if (PlayerHandler.purple.contains(uuid)) {
+
+                                    PlayerHandler.purple.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.DARK_PURPLE + "Purple Team" + ChatColor.GOLD + " and joined " + ChatColor.DARK_GREEN + "Green Team", p);
+
+                                } else if (PlayerHandler.yellow.contains(uuid)) {
+
+                                    PlayerHandler.yellow.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.YELLOW + "Yellow Team" + ChatColor.GOLD + " and joined " + ChatColor.DARK_GREEN + "Green Team", p);
+
+                                } else {
+
+                                    ChatUtilities.onePlayer("You joined " + ChatColor.DARK_GREEN + "Green Team", p);
+
+                                }
+
+                                PlayerHandler.green.add(uuid);
+                                Database.updatePasses(p, Database.getPasses(p) - 1);
+                                ChatUtilities.onePlayer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
+
+                            } else {
+
+                                ChatUtilities.onePlayer(ChatColor.DARK_GREEN + "Green Team" + ChatColor.GOLD + " cannot be joined at this time", p);
+
+                            }
+
+                        }
+
+                    }
+                } else if (passnum > -1) {
+
+                    ChatUtilities.onePlayer(ChatColor.GOLD + "You don't have any passes!", p);
+
+                }
+
+            } else {
+
+                ChatUtilities.onePlayer("You cannot join a team while a game is in progress", p);
+
+            }
+
+            Database.closeConnection();
+
+        }
+        
+        if (commandLabel.equalsIgnoreCase("yellow")) {
+
+            Player p = (Player) sender;
+            UUID uuid = p.getUniqueId();
+
+            Database.openConnection();
+            int passnum = Database.getPasses(p);
+
+            if (GameState.isState(GameState.IN_LOBBY)) {
+
+                if (passnum > 1) {
+
+                    if (PlayerHandler.yellow.contains(uuid)) {
+
+                        ChatUtilities.onePlayer("You are already on " + ChatColor.YELLOW + "Yellow Team", p);
+
+                    } else {
+
+                        if (Bukkit.getOnlinePlayers().size() > 4) {
+
+                            if (PlayerHandler.yellow.size() < 2) {
+
+                                if (PlayerHandler.red.contains(uuid)) {
+
+                                    PlayerHandler.red.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.RED + "Red Team" + ChatColor.GOLD + " and joined " + ChatColor.YELLOW + "Yellow Team", p);
+
+                                } else if (PlayerHandler.purple.contains(uuid)) {
+
+                                    PlayerHandler.purple.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.DARK_PURPLE + "Purple Team" + ChatColor.GOLD + " and joined " + ChatColor.YELLOW + "Yellow Team", p);
+
+                                } else if (PlayerHandler.green.contains(uuid)) {
+
+                                    PlayerHandler.green.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.DARK_GREEN + "Green Team" + ChatColor.GOLD + " and joined " + ChatColor.YELLOW + "Yellow Team", p);
+
+                                } else {
+
+                                    ChatUtilities.onePlayer("You joined " + ChatColor.YELLOW + "Yellow Team", p);
+
+                                }
+
+                                PlayerHandler.yellow.add(uuid);
+                                Database.updatePasses(p, Database.getPasses(p) - 1);
+                                ChatUtilities.onePlayer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
+
+                            } else {
+
+                                ChatUtilities.onePlayer(ChatColor.YELLOW + "Yellow Team" + ChatColor.GOLD + " is full", p);
+
+                            }
+
+                        } else {
+
+                            if (PlayerHandler.yellow.size() < 1) {
+
+                                if (PlayerHandler.red.contains(uuid)) {
+
+                                    PlayerHandler.red.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.RED + "Red Team" + ChatColor.GOLD + " and joined " + ChatColor.YELLOW + "Yellow Team", p);
+
+                                } else if (PlayerHandler.purple.contains(uuid)) {
+
+                                    PlayerHandler.purple.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.DARK_PURPLE + "Purple Team" + ChatColor.GOLD + " and joined " + ChatColor.YELLOW + "Yellow Team", p);
+
+                                } else if (PlayerHandler.green.contains(uuid)) {
+
+                                    PlayerHandler.green.remove(uuid);
+                                    ChatUtilities.onePlayer("You left " + ChatColor.DARK_GREEN + "Green Team" + ChatColor.GOLD + " and joined " + ChatColor.YELLOW + "Yellow Team", p);
+
+                                } else {
+
+                                    ChatUtilities.onePlayer("You joined " + ChatColor.YELLOW + "Yellow Team", p);
+
+                                }
+
+                                PlayerHandler.yellow.add(uuid);
+                                Database.updatePasses(p, Database.getPasses(p) - 1);
+                                ChatUtilities.onePlayer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
+
+                            } else {
+
+                                ChatUtilities.onePlayer(ChatColor.YELLOW + "Yellow Team" + ChatColor.GOLD + " cannot be joined at this time", p);
+
+                            }
+
+                        }
+
+                    }
+                } else if (passnum > -1) {
+
+                    ChatUtilities.onePlayer(ChatColor.GOLD + "You don't have any passes!", p);
+
+                }
+
+            } else {
+
+                ChatUtilities.onePlayer("You cannot join a team while a game is in progress", p);
+
+            }
+
+            Database.closeConnection();
 
         }
 
@@ -119,32 +556,32 @@ public class CoreChaos extends JavaPlugin {
             } else if (args.length == 1) {
 
                 try {
-                    
+
                     Database.openConnection();
 
                     OfflinePlayer targetPlayer = p.getServer().getOfflinePlayer(args[0]);
-                    if(Database.ccTableContainsOfflinePlayer(targetPlayer)){
-                        
+                    if (Database.ccTableContainsOfflinePlayer(targetPlayer)) {
+
                         ChatUtilities.records(targetPlayer, p);
-                        
-                    } else if(Database.playerTableContainsOfflinePlayer(targetPlayer)) {
-                        
+
+                    } else if (Database.playerTableContainsOfflinePlayer(targetPlayer)) {
+
                         p.sendMessage(ChatColor.GRAY + "[" + ChatColor.RED + "Red" + ChatColor.GREEN + "Apple" + ChatColor.RED + "Core" + ChatColor.GRAY + "] " + ChatColor.GOLD + "This player has never played " + ChatColor.AQUA + "CoreChaos");
-                        
+
                     } else {
-                        
+
                         p.sendMessage(ChatColor.GRAY + "[" + ChatColor.RED + "Red" + ChatColor.GREEN + "Apple" + ChatColor.RED + "Core" + ChatColor.GRAY + "] " + ChatColor.GOLD + "This player has never been on " + ChatColor.RED + "Red" + ChatColor.GREEN + "Apple" + ChatColor.RED + "Core");
-                        
+
                     }
 
                 } catch (Exception e) {
-                    
+
                     ChatUtilities.onePlayer("Wrong use of this command!", p);
-                    
+
                 } finally {
-                    
+
                     Database.closeConnection();
-                    
+
                 }
 
             } else {

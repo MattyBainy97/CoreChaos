@@ -24,6 +24,14 @@ commands:
     description: Shows the player their records
   msg:
     description: Sends a message to the player
+  red:
+    description: Adds the player to the red team
+  purple:
+    description: Adds the player to the purple team
+  green:
+    description: Adds the player to the green team
+  yellow:
+    description: Adds the player to the yellow team
     
 permissions:
   corechaos.start:
