@@ -5,6 +5,7 @@ import com.corechaos.handlers.Database;
 import com.corechaos.handlers.PlayerHandler;
 import com.corechaos.handlers.Tasks;
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.UUID;
@@ -211,6 +212,12 @@ public class ChatUtilities {
         player.sendMessage(starter() + msg);
 
     }
+    
+    public static void onePlayerServer(String msg, Player player) {
+
+        player.sendMessage(serverStarter() + msg);
+
+    }
 
     public static void chat(String msg, Player player) {
 
@@ -306,7 +313,7 @@ public class ChatUtilities {
 
         try {
 
-            double kd = Database.getOfflineCc(player, "kills") / Database.getOfflineCc(player, "deaths");
+            double kd = (double) Database.getOfflineCc(player, "kills") / (double) Database.getOfflineCc(player, "deaths");
             DecimalFormat df = new DecimalFormat("#.##");
             df.setRoundingMode(RoundingMode.CEILING);
             
@@ -360,5 +367,11 @@ public class ChatUtilities {
 
         return GRAY + "[" + AQUA + "CoreChaos" + GRAY + "] " + GOLD;
 
+    }
+    
+    public static String serverStarter(){
+        
+        return ChatColor.GRAY + "[" + RED + "Red" + GREEN + "Apple" + RED + "Core" + GRAY + "] " + GOLD;
+        
     }
 }

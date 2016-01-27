@@ -105,7 +105,7 @@ public class PlayerJoin extends CCListener {
             p.removePotionEffect(PotionEffectType.INVISIBILITY);
             p.setGameMode(GameMode.ADVENTURE);
             p.teleport(LocationUtilities.lobby);
-            Game.setCanStart(Bukkit.getOnlinePlayers().size() >= 2);
+            Game.setCanStart(Bukkit.getOnlinePlayers().size() >= 4);
 
         } else {
 
