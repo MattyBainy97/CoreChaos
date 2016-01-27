@@ -162,7 +162,7 @@ public class CoreChaos extends JavaPlugin {
 
                                 PlayerHandler.red.add(uuid);
                                 Database.updatePasses(p, Database.getPasses(p) - 1);
-                                ChatUtilities.onePlayer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
+                                ChatUtilities.onePlayerServer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
 
                             } else {
 
@@ -197,7 +197,7 @@ public class CoreChaos extends JavaPlugin {
 
                                 PlayerHandler.red.add(uuid);
                                 Database.updatePasses(p, Database.getPasses(p) - 1);
-                                ChatUtilities.onePlayer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
+                                ChatUtilities.onePlayerServer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
 
                             } else {
 
@@ -210,7 +210,7 @@ public class CoreChaos extends JavaPlugin {
                     }
                 } else if (passnum > -1) {
 
-                    ChatUtilities.onePlayer(ChatColor.GOLD + "You don't have any passes!", p);
+                    ChatUtilities.onePlayerServer(ChatColor.GOLD + "You don't have any passes!", p);
 
                 }
 
@@ -269,7 +269,7 @@ public class CoreChaos extends JavaPlugin {
 
                                 PlayerHandler.purple.add(uuid);
                                 Database.updatePasses(p, Database.getPasses(p) - 1);
-                                ChatUtilities.onePlayer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
+                                ChatUtilities.onePlayerServer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
 
                             } else {
 
@@ -304,7 +304,7 @@ public class CoreChaos extends JavaPlugin {
 
                                 PlayerHandler.purple.add(uuid);
                                 Database.updatePasses(p, Database.getPasses(p) - 1);
-                                ChatUtilities.onePlayer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
+                                ChatUtilities.onePlayerServer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
 
                             } else {
 
@@ -317,7 +317,7 @@ public class CoreChaos extends JavaPlugin {
                     }
                 } else if (passnum > -1) {
 
-                    ChatUtilities.onePlayer(ChatColor.GOLD + "You don't have any passes!", p);
+                    ChatUtilities.onePlayerServer(ChatColor.GOLD + "You don't have any passes!", p);
 
                 }
 
@@ -376,7 +376,7 @@ public class CoreChaos extends JavaPlugin {
 
                                 PlayerHandler.green.add(uuid);
                                 Database.updatePasses(p, Database.getPasses(p) - 1);
-                                ChatUtilities.onePlayer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
+                                ChatUtilities.onePlayerServer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
 
                             } else {
 
@@ -411,7 +411,7 @@ public class CoreChaos extends JavaPlugin {
 
                                 PlayerHandler.green.add(uuid);
                                 Database.updatePasses(p, Database.getPasses(p) - 1);
-                                ChatUtilities.onePlayer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
+                                ChatUtilities.onePlayerServer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
 
                             } else {
 
@@ -424,7 +424,7 @@ public class CoreChaos extends JavaPlugin {
                     }
                 } else if (passnum > -1) {
 
-                    ChatUtilities.onePlayer(ChatColor.GOLD + "You don't have any passes!", p);
+                    ChatUtilities.onePlayerServer(ChatColor.GOLD + "You don't have any passes!", p);
 
                 }
 
@@ -483,7 +483,7 @@ public class CoreChaos extends JavaPlugin {
 
                                 PlayerHandler.yellow.add(uuid);
                                 Database.updatePasses(p, Database.getPasses(p) - 1);
-                                ChatUtilities.onePlayer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
+                                ChatUtilities.onePlayerServer(ChatColor.GOLD + "Taken" + ChatColor.RED + " 1 " + ChatColor.GOLD + "pass! You now have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + "!", p);
 
                             } else {
 
@@ -512,7 +512,7 @@ public class CoreChaos extends JavaPlugin {
 
                                 } else {
 
-                                    ChatUtilities.onePlayer("You joined " + ChatColor.YELLOW + "Yellow Team", p);
+                                    ChatUtilities.onePlayerServer("You joined " + ChatColor.YELLOW + "Yellow Team", p);
 
                                 }
 
@@ -531,7 +531,7 @@ public class CoreChaos extends JavaPlugin {
                     }
                 } else if (passnum > -1) {
 
-                    ChatUtilities.onePlayer(ChatColor.GOLD + "You don't have any passes!", p);
+                    ChatUtilities.onePlayerServer(ChatColor.GOLD + "You don't have any passes!", p);
 
                 }
 
@@ -566,17 +566,17 @@ public class CoreChaos extends JavaPlugin {
 
                     } else if (Database.playerTableContainsOfflinePlayer(targetPlayer)) {
 
-                        p.sendMessage(ChatColor.GRAY + "[" + ChatColor.RED + "Red" + ChatColor.GREEN + "Apple" + ChatColor.RED + "Core" + ChatColor.GRAY + "] " + ChatColor.GOLD + "This player has never played " + ChatColor.AQUA + "CoreChaos");
+                        ChatUtilities.onePlayerServer("This player has never played " + ChatColor.AQUA + "CoreChaos", p);
 
                     } else {
 
-                        p.sendMessage(ChatColor.GRAY + "[" + ChatColor.RED + "Red" + ChatColor.GREEN + "Apple" + ChatColor.RED + "Core" + ChatColor.GRAY + "] " + ChatColor.GOLD + "This player has never been on " + ChatColor.RED + "Red" + ChatColor.GREEN + "Apple" + ChatColor.RED + "Core");
+                        ChatUtilities.onePlayerServer("This player has never been on " + ChatColor.RED + "Red" + ChatColor.GREEN + "Apple" + ChatColor.RED + "Core", p);
 
                     }
 
                 } catch (Exception e) {
 
-                    ChatUtilities.onePlayer("Wrong use of this command!", p);
+                    ChatUtilities.onePlayerServer("Wrong use of this command!", p);
 
                 } finally {
 
@@ -586,7 +586,7 @@ public class CoreChaos extends JavaPlugin {
 
             } else {
 
-                ChatUtilities.onePlayer("Wrong use of this command!", p);
+                ChatUtilities.onePlayerServer("Wrong use of this command!", p);
 
             }
 
@@ -598,12 +598,12 @@ public class CoreChaos extends JavaPlugin {
             if (args.length == 0) {
 
                 Database.openConnection();
-                ChatUtilities.onePlayer(ChatColor.GOLD + "You have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + " passes remaining!", p);
+                ChatUtilities.onePlayerServer(ChatColor.GOLD + "You have " + ChatColor.GREEN + Database.getPasses(p) + ChatColor.GOLD + " passes remaining!", p);
                 Database.closeConnection();
 
             } else {
 
-                ChatUtilities.onePlayer("Wrong use of this command!", p);
+                ChatUtilities.onePlayerServer("Wrong use of this command!", p);
 
             }
 
@@ -614,29 +614,29 @@ public class CoreChaos extends JavaPlugin {
             Database.openConnection();
             if (p.isOp() == true) {
                 if (args.length == 0) {
-                    ChatUtilities.onePlayer("Wrong use of this command!", p);
+                    ChatUtilities.onePlayerServer("Wrong use of this command!", p);
                 } else if (args.length == 1) {
-                    ChatUtilities.onePlayer("Wrong use of this command!", p);
+                    ChatUtilities.onePlayerServer("Wrong use of this command!", p);
                 } else if (args.length == 2) {
                     try {
                         Player targetPlayer = p.getServer().getPlayer(args[0]);
                         try {
                             int i = Integer.parseInt(args[1]);
                             if (i >= 0 && i <= 100) {
-                                ChatUtilities.onePlayer(ChatColor.GOLD + "You have recieved " + ChatColor.GREEN + i + ChatColor.GOLD + " passes!", targetPlayer);
+                                ChatUtilities.onePlayerServer(ChatColor.GOLD + "You have recieved " + ChatColor.GREEN + i + ChatColor.GOLD + " passes!", targetPlayer);
                                 if (targetPlayer != p) {
-                                    ChatUtilities.onePlayer(ChatColor.GOLD + "You have sent " + ChatColor.GREEN + i + ChatColor.GOLD + " passes to " + ChatColor.DARK_AQUA + targetPlayer.getName() + ChatColor.GOLD + "!", p);
+                                    ChatUtilities.onePlayerServer(ChatColor.GOLD + "You have sent " + ChatColor.GREEN + i + ChatColor.GOLD + " passes to " + ChatColor.DARK_AQUA + targetPlayer.getName() + ChatColor.GOLD + "!", p);
                                 }
                                 Database.updatePasses(targetPlayer, Database.getPasses(targetPlayer) + i);
                             } else {
-                                ChatUtilities.onePlayer(ChatColor.GOLD + "Enter a serious number... " + ChatColor.RED + i + ChatColor.GOLD + " is just too many...", p);
+                                ChatUtilities.onePlayerServer(ChatColor.GOLD + "Enter a serious number... " + ChatColor.RED + i + ChatColor.GOLD + " is just too many...", p);
                             }
                         } catch (Exception e) {
-                            ChatUtilities.onePlayer("Wrong use of this command!", p);
+                            ChatUtilities.onePlayerServer("Wrong use of this command!", p);
                         }
 
                     } catch (Exception e) {
-                        ChatUtilities.onePlayer("Player is not online!", p);
+                        ChatUtilities.onePlayerServer("Player is not online!", p);
                     }
                 }
             }
@@ -647,12 +647,12 @@ public class CoreChaos extends JavaPlugin {
             Player player = (Player) sender;
             final HashMap<String, String> hashmap = new HashMap<String, String>();
             if (args.length < 2) {
-                ChatUtilities.onePlayer(ChatColor.RED + "Too few arguments", (Player) sender);
-                ChatUtilities.onePlayer(ChatColor.RED + "/msg <player> <message>", (Player) sender);
+                ChatUtilities.onePlayerServer(ChatColor.RED + "Too few arguments", (Player) sender);
+                ChatUtilities.onePlayerServer(ChatColor.RED + "/msg <player> <message>", (Player) sender);
                 return true;
             }
             if (Bukkit.getPlayer(args[0]) == null) {
-                ChatUtilities.onePlayer(ChatColor.RED + "That player is not online", (Player) sender);
+                ChatUtilities.onePlayerServer(ChatColor.RED + "That player is not online", (Player) sender);
                 return true;
             }
             String msg = "";
